@@ -39,8 +39,27 @@
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script src="barcodescanner.js"></script>
         <script type="text/javascript">
             app.initialize();
+            function scan(){
+                cordova.plugins.barcodeScanner.scan(
+                  function (result) {
+                      alert("We got a barcode\n" +
+                            "Result: " + result.text + "\n" +
+                            "Format: " + result.format + "\n" +
+                            "Cancelled: " + result.cancelled);
+                  }, 
+                  function (error) {
+                      alert("Scanning failed: " + error);
+                  }
+               );
+            }
         </script>
+        <p>
+            <h3>BARCODE</h3>
+            <input class="barcode" size="20"/>
+            <button class="barcode_button" onclick="scan()">BARCODE</button>
+        </p>
     </body>
 </html>
